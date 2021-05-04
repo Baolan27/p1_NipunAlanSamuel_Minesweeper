@@ -13,5 +13,8 @@ public class Board {
         w = width;
         m = numMines;
     }
-
+  
+    public void fill() {
+      
+    }
 }

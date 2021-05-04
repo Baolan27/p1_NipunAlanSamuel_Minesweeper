@@ -1,4 +1,3 @@
-
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -58,4 +57,5 @@ public class GUI implements MouseListener, ActionListener {
 	public void actionPerformed(ActionEvent e) {
 
 	}
+  
 }
