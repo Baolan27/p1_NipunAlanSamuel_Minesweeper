@@ -13,13 +13,12 @@ public class Tile {
         } else if (type == 1) {
             //set uncovered image to a number
         } else if (type == 2) {
-
+            //set uncovered image to a mine
         }
     }
 
     public ImageIcon getTileImage() {
         return display;
     }
-
 
 }

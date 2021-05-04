@@ -4,8 +4,8 @@ public class Board {
 
     public Board() { //default is intermediate
         l = 16;
-        w=16;
-        m=40;
+        w = 16;
+        m = 40;
     }
 
     public Board(int length, int width, int numMines) { //custom game, beginner (9,9,10), expert (16,30,99)
@@ -13,9 +13,8 @@ public class Board {
         w = width;
         m = numMines;
     }
-
+  
     public void fill() {
-
+      
     }
-
 }
