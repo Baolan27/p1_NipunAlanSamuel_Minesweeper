@@ -30,63 +30,12 @@ public class GUI implements MouseListener, ActionListener {
 		//loop to create all labels based on board and add them to frame
 		for (int i = 0; i < board.getL(); i++) {
 			for (int j = 0; j < board.getW(); j++) {
-				board.getBoard()[i][j].addMouseListener(new MouseListener() {
-					@Override
-					public void mouseClicked(MouseEvent e) {
-						
-					}
-
-					@Override
-					public void mousePressed(MouseEvent e) {
-
-					}
-
-					@Override
-					public void mouseReleased(MouseEvent e) {
-
-					}
-
-					@Override
-					public void mouseEntered(MouseEvent e) {
-
-					}
-
-					@Override
-					public void mouseExited(MouseEvent e) {
-
-					}
-				});
 				frame.add(board.getBoard()[i][j], i);
 			}
 		}
 
 		extraPanel.add(panel);
 		frame.add(extraPanel, BorderLayout.CENTER);
-		frame.addMouseListener(new MouseListener() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-			}
-
-			@Override
-			public void mousePressed(MouseEvent e) {
-
-			}
-
-			@Override
-			public void mouseReleased(MouseEvent e) {
-
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {
-
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-
-			}
-		});
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setTitle("Minesweeper");
 		frame.setVisible(true);

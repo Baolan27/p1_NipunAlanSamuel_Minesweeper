@@ -21,9 +21,8 @@ public class Board {
     public void fill() {
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[i].length; j++) {
-                //board[i][j] = new Tile((int) (Math.random() * 10));
-                board[i][j] = new Tile(1);
-                board[i][j].revealTile();
+                board[i][j] = new Tile((int) (Math.random() * 10));
+                //board[i][j] = new Tile(3);
             }
         }
     }
