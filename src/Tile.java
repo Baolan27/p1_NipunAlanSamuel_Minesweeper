@@ -5,7 +5,7 @@ import javax.swing.SwingUtilities;
 
 public class Tile extends JLabel{
 
-    private ImageIcon coverImage = new ImageIcon("src/Images/tile.png", "Uncovered tile image"); //initialize with generic tile image (same for all tiles)
+    private ImageIcon coverImage = new ImageIcon("/Users/Loki/Downloads/p1_NipunAlanSamuel_Minesweeper/src/Images/tile.png", "Uncovered tile image"); //initialize with generic tile image (same for all tiles)
     private ImageIcon uncoveredImage; //initialize in constructor depending on the type
     private ImageIcon display; //what the tile actually looks like
     private boolean isFlagged = false;
@@ -16,13 +16,13 @@ public class Tile extends JLabel{
         this.type = type;
         if (type == 0) {
             //set uncovered image to an empty space
-            uncoveredImage = new ImageIcon("src/Images/empty.png", "Empty tile image");
+            uncoveredImage = new ImageIcon("/Users/Loki/Downloads/p1_NipunAlanSamuel_Minesweeper/src/Images/empty.png", "Empty tile image");
         } else if (type >= 1 && type <= 8) {
             //set uncovered image to a number
-            uncoveredImage = new ImageIcon("src/Images/" + type + ".png", "Number tile image");
+            uncoveredImage = new ImageIcon("/Users/Loki/Downloads/p1_NipunAlanSamuel_Minesweeper/src/Images/" + type + ".png", "Number tile image");
         } else if (type == 9) {
             //set uncovered image to a mine
-            uncoveredImage = new ImageIcon("src/Images/mine.png", "Tile with mine image");
+            uncoveredImage = new ImageIcon("/Users/Loki/Downloads/p1_NipunAlanSamuel_Minesweeper/src/Images/mine.png", "Tile with mine image");
         }
         display = coverImage;
         super.setIcon(display);
@@ -75,7 +75,7 @@ public class Tile extends JLabel{
 
     public void flagTile() {
         //putting a flag on the tile
-        coverImage = new ImageIcon("src/Images/flag.png", "Tile with flag");
+        coverImage = new ImageIcon("/Users/Loki/Downloads/p1_NipunAlanSamuel_Minesweeper/src/Images/flag.png", "Tile with flag");
         display = coverImage;
         super.setIcon(display);
         isFlagged = true;
@@ -83,7 +83,7 @@ public class Tile extends JLabel{
 
     public void unFlagTile() {
         //removing the flag from a flagged tile
-        coverImage = new ImageIcon("src/Images/tile.png", "Uncovered tile image");
+        coverImage = new ImageIcon("/Users/Loki/Downloads/p1_NipunAlanSamuel_Minesweeper/src/Images/tile.png", "Uncovered tile image");
         display = coverImage;
         super.setIcon(display);
         isFlagged = false;
