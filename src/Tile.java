@@ -10,9 +10,11 @@ public class Tile extends JLabel{
     private ImageIcon display; //what the tile actually looks like
     private boolean isFlagged = false;
     private int type;
+    private Board board; //reference to the board class
+    private int x, y; //storing the x and y of tiles for the purpose of board class
 
     //0 = empty tile, 1 = number tile, 2 = mine tile
-    public Tile(int type) {
+    public Tile(int type, Board b, int x, int y) {
         this.type = type;
         if (type == 0) {
             //set uncovered image to an empty space
@@ -39,7 +41,6 @@ public class Tile extends JLabel{
                         unFlagTile();
                     }
                 }
-                System.out.println(type);
             }
 
             @Override
@@ -62,6 +63,10 @@ public class Tile extends JLabel{
 
             }
         });
+
+        board = b; //storing a reference to board to detect first click
+        this.x = x;
+        this.y = y;
     }
 
     public ImageIcon getTileImage() {
@@ -69,6 +74,9 @@ public class Tile extends JLabel{
     }
 
     public void revealTile() {
+        if (!board.isFilled()) {
+            board.fill(x, y);
+        }
         display = uncoveredImage;
         super.setIcon(display);
     }
