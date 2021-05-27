@@ -8,7 +8,7 @@ public class Board {
         w = 16;
         m = 40;
         board = new Tile[l][w];
-        fill();
+        fillTemp();
     }
 
     public Board(int length, int width, int numMines) { //custom game, beginner (9,9,10), expert (16,30,99)
@@ -17,14 +17,29 @@ public class Board {
         m = numMines;
         fill();
     }
-  
-    public void fill() {
+
+    //temporarily filling the board with empty tiles
+    public void fillTemp() {
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[i].length; j++) {
-                board[i][j] = new Tile((int) (Math.random() * 10));
-                //board[i][j] = new Tile(3);
+                board[i][j] = new Tile(0);
             }
         }
+    }
+
+    //implement filling algorithm
+    public void fill() {
+        //fill in mines
+        for (int i = 0; i < m; i++) {
+            int x = (int) (Math.random() * 9);
+            int y = (int) (Math.random() * 9);
+            if (board[x][y].getType() == 0) {
+                board[x][y] = new Tile(9);
+            } else {
+                i--;
+            }
+        }
+        //@alan - fill in method that fills out all the remaining tiles (they are empty by default)
     }
 
     public int getL() {

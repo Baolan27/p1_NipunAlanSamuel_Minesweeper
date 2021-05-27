@@ -9,7 +9,7 @@ public class Tile extends JLabel{
     private ImageIcon uncoveredImage; //initialize in constructor depending on the type
     private ImageIcon display; //what the tile actually looks like
     private boolean isFlagged = false;
-    int type;
+    private int type;
 
     //0 = empty tile, 1 = number tile, 2 = mine tile
     public Tile(int type) {
