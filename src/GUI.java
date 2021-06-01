@@ -44,7 +44,7 @@ public class GUI implements MouseListener, ActionListener {
 		Timer t = new Timer(16, this);
 		t.start();
 	}
-		
+
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		new GUI();
@@ -79,5 +79,5 @@ public class GUI implements MouseListener, ActionListener {
 	public void actionPerformed(ActionEvent e) {
 
 	}
-  
+
 }
