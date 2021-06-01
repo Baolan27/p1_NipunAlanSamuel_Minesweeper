@@ -50,18 +50,14 @@ public class GUI implements MouseListener, ActionListener {
 		new GUI();
 	}
 
-	public void update(int i, int j) {
-		board.getBoard()[i][j].revealTile();
-	}
-
 	@Override
 	public void mouseClicked(MouseEvent e) {
-
+		
 	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		System.out.println("hi");
+
 	}
 
 	@Override

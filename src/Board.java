@@ -24,7 +24,7 @@ public class Board {
     public void fillTemp() {
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[i].length; j++) {
-                board[i][j] = new Tile(7, this, i, j);
+                board[i][j] = new Tile(0, this, i, j);
             }
         }
     }
@@ -35,9 +35,8 @@ public class Board {
         for (int i = 0; i < m; i++) {
             int x = (int) (Math.random() * 9);
             int y = (int) (Math.random() * 9);
-            if (board[x][y].getType() == 7 && !(x == clickX && y == clickY)) {
-                board[x][y] = new Tile(9, this, x, y);
-                System.out.println("filled a mine at " + x + y);
+            if (board[x][y].getType() == 0 && !(x == clickX && y == clickY)) {
+                board[x][y].changeType(9);
             } else {
                 i--;
             }
@@ -47,8 +46,8 @@ public class Board {
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[i].length; j++) {
                 if (board[i][j].getType() != 9) {
-                    // @alan - fill in your code here that calculates tile numbers (right now just puts 1)
-                    board[i][j] = new Tile(3, this, i, j);
+                    // @alan - fill in your code here that calculates tile numbers (right now just puts 3 for all of them)
+                    board[i][j].changeType(3);
                 }
             }
         }

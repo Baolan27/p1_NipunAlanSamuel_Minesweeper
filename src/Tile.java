@@ -65,8 +65,8 @@ public class Tile extends JLabel{
         });
 
         board = b; //storing a reference to board to detect first click
-        this.x = x;
-        this.y = y;
+        this.x = x; //x-coordinate of tile in board
+        this.y = y; //y-coordinate of tile in board
     }
 
     public ImageIcon getTileImage() {
@@ -103,5 +103,21 @@ public class Tile extends JLabel{
 
     public int getType() {
         return type;
+    }
+
+    public void changeType(int type) {
+        this.type = type;
+        if (type == 0) {
+            //set uncovered image to an empty space
+            uncoveredImage = new ImageIcon("src/Images/empty.png", "Empty tile image");
+        } else if (type >= 1 && type <= 8) {
+            //set uncovered image to a number
+            uncoveredImage = new ImageIcon("src/Images/" + type + ".png", "Number tile image");
+        } else if (type == 9) {
+            //set uncovered image to a mine
+            uncoveredImage = new ImageIcon("src/Images/mine.png", "Tile with mine image");
+        }
+        display = coverImage;
+        super.setIcon(display);
     }
 }
