@@ -58,7 +58,36 @@ public class Board {
             for (int j = 0; j < board[i].length; j++) {
                 if (board[i][j].getType() != 9) {
                     // @alan - fill in your code here that calculates tile numbers (right now just puts 3 for all of them)
-                    board[i][j].changeType(3);
+                    int count = 0;
+                    if (board[i][j].x > 0) {
+                        if (getTile(board[i][j].x - 1, board[i][j].y).getType() == 9) {
+                            count++;
+                        }
+                        if (board[i][j].y > 0 && getTile(board[i][j].x - 1, board[i][j].y - 1).getType() == 9) {
+                            count++;
+                        }
+                        if (board[i][j].y < 15 && getTile(board[i][j].x - 1, board[i][j].y + 1).getType() == 9) {
+                            count++;
+                        }
+                    }
+                    if (board[i][j].y > 0 && getTile(board[i][j].x, board[i][j].y - 1).getType() == 9) {
+                        count++;
+                    }
+                    if (board[i][j].y < 15 && getTile(board[i][j].x, board[i][j].y + 1).getType() == 9) {
+                        count++;
+                    }
+                    if (board[i][j].x < 15) {
+                        if (getTile(board[i][j].x + 1, board[i][j].y).getType() == 9) {
+                            count++;
+                        }
+                        if (board[i][j].y > 0 && getTile(board[i][j].x + 1, board[i][j].y - 1).getType() == 9) {
+                            count++;
+                        }
+                        if (board[i][j].y < 15 && getTile(board[i][j].x + 1, board[i][j].y + 1).getType() == 9) {
+                            count++;
+                        }
+                    }
+                    board[i][j].changeType(count);
                 }
             }
         }
@@ -92,6 +121,17 @@ public class Board {
 
     public Tile[][] getBoard() {
         return board;
+    }
+
+    public Tile getTile(int x, int y) {
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[i].length; j++) {
+                if (board[i][j].x == x && board[i][j].y == y) {
+                    return board[i][j];
+                }
+            }
+        }
+        return null;
     }
 
     public boolean isFilled() {

@@ -11,7 +11,7 @@ public class Tile extends JLabel {
     private boolean isFlagged = false;
     private int type;
     private Board board; //reference to the board class
-    private int x, y; //storing the x and y of tiles for the purpose of board class
+    public int x, y; //storing the x and y of tiles for the purpose of board class
 
     //0 = empty tile, 1 = number tile, 2 = mine tile
     public Tile(int type, Board b, int x, int y) {
@@ -105,6 +105,8 @@ public class Tile extends JLabel {
     public int getType() {
         return type;
     }
+
+
 
     public void changeType(int type) {
         this.type = type;
