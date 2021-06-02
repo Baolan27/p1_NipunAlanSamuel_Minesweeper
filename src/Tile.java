@@ -79,6 +79,7 @@ public class Tile extends JLabel {
         }
         display = uncoveredImage;
         super.setIcon(display);
+        System.out.println(x + " " + y);
     }
 
     public void flagTile() {

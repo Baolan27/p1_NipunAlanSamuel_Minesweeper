@@ -22,9 +22,20 @@ public class Board {
 
     //temporarily filling the board with empty tiles
     public void fillTemp() {
+        int x = 15, y = 16;
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[i].length; j++) {
-                board[i][j] = new Tile(0, this, i, j);
+                if (j == 15) {
+                    board[i][j] = new Tile(0, this, i, 0);
+                } else {
+                    if (i == j) {
+                        x = 15;
+                        y--;
+                    } else {
+                        x--;
+                    }
+                    board[i][j] = new Tile(0, this, x, y);
+                }
             }
         }
     }
@@ -35,7 +46,7 @@ public class Board {
         for (int i = 0; i < m; i++) {
             int x = (int) (Math.random() * 9);
             int y = (int) (Math.random() * 9);
-            if (board[x][y].getType() == 0 && !(x == clickX && y == clickY)) {
+            if (board[x][y].getType() == 0 && !(Math.abs(x - clickX) <= 1 && Math.abs(y - clickY) <= 1)) {
                 board[x][y].changeType(9);
             } else {
                 i--;
