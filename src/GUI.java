@@ -10,10 +10,15 @@ public class GUI implements MouseListener, ActionListener {
 	//global variables
 	Board board;
 	JFrame frame;
+	Music bgm;
 
 	public GUI() {
 		//initializing board and label storage
 		board = new Board();
+		
+		//music
+		bgm = new Music("backgroundmusic.wav",true);
+		bgm.play();
 
 		//JFrame setup
 		frame = new JFrame("Minesweeper");
