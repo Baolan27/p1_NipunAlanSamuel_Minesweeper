@@ -7,7 +7,7 @@ public class Board {
     public Board() { //default is intermediate
         l = 16;
         w = 16;
-        m = 40;
+        m = 31;
         board = new Tile[l][w];
         fillTemp();
         filled = false; //not filled until the proper fill() method is called, not fillTemp()
@@ -44,10 +44,10 @@ public class Board {
     public void fill(int clickX, int clickY) {
         //fill in mines
         for (int i = 0; i < m; i++) {
-            int x = (int) (Math.random() * 9);
-            int y = (int) (Math.random() * 9);
-            if (board[x][y].getType() == 0 && !(Math.abs(x - clickX) <= 1 && Math.abs(y - clickY) <= 1)) {
-                board[x][y].changeType(9);
+            int x = (int) (Math.random() * 16);
+            int y = (int) (Math.random() * 16);
+            if (getTile(x, y).getType() == 0 && !(Math.abs(x - clickX) <= 1 && Math.abs(y - clickY) <= 1)) {
+                getTile(x, y).changeType(9);
             } else {
                 i--;
             }
@@ -57,7 +57,7 @@ public class Board {
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[i].length; j++) {
                 if (board[i][j].getType() != 9) {
-                    // @alan - fill in your code here that calculates tile numbers (right now just puts 3 for all of them)
+                    //calculates tile numbers based on number of surrounding mines
                     int count = 0;
                     if (board[i][j].x > 0) {
                         if (getTile(board[i][j].x - 1, board[i][j].y).getType() == 9) {
@@ -93,6 +93,66 @@ public class Board {
         }
 
         filled = true; // do not remove
+    }
+
+    public void floodFill(int x, int y) {
+        getTile(x, y).reveal();
+        if (getTile(x - 1, y) != null && !getTile(x - 1, y).isRevealed()) {
+            if (getTile(x - 1, y).getType() == 0) {
+                floodFill(x - 1, y);
+            } else {
+                getTile(x - 1, y).reveal();
+            }
+        }
+        if (getTile(x + 1, y) != null && !getTile(x + 1, y).isRevealed()) {
+            if (getTile(x + 1, y).getType() == 0) {
+                floodFill(x + 1, y);
+            } else {
+                getTile(x + 1, y).reveal();
+            }
+        }
+        if (getTile(x, y - 1) != null && !getTile(x, y - 1).isRevealed()) {
+            if (getTile(x, y - 1).getType() == 0) {
+                floodFill(x, y - 1);
+            } else {
+                getTile(x, y - 1).reveal();
+            }
+        }
+        if (getTile(x, y + 1) != null && !getTile(x, y + 1).isRevealed()) {
+            if (getTile(x, y + 1).getType() == 0) {
+                floodFill(x, y + 1);
+            } else {
+                getTile(x, y + 1).reveal();
+            }
+        }
+        if (getTile(x - 1, y - 1) != null && !getTile(x - 1, y - 1).isRevealed()) {
+            if (getTile(x - 1, y - 1).getType() == 0) {
+                floodFill(x - 1, y - 1);
+            } else {
+                getTile(x - 1, y - 1).reveal();
+            }
+        }
+        if (getTile(x - 1, y + 1) != null && !getTile(x - 1, y + 1).isRevealed()) {
+            if (getTile(x - 1, y + 1).getType() == 0) {
+                floodFill(x - 1, y + 1);
+            } else {
+                getTile(x - 1, y + 1).reveal();
+            }
+        }
+        if (getTile(x + 1, y - 1) != null && !getTile(x + 1, y - 1).isRevealed()) {
+            if (getTile(x + 1, y - 1).getType() == 0) {
+                floodFill(x + 1, y - 1);
+            } else {
+                getTile(x + 1, y - 1).reveal();
+            }
+        }
+        if (getTile(x + 1, y + 1) != null && !getTile(x + 1, y + 1).isRevealed()) {
+            if (getTile(x + 1, y + 1).getType() == 0) {
+                floodFill(x + 1, y + 1);
+            } else {
+                getTile(x + 1, y + 1).reveal();
+            }
+        }
     }
 
     public int getL() {

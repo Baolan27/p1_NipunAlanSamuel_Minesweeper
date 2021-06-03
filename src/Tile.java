@@ -9,6 +9,7 @@ public class Tile extends JLabel {
     private ImageIcon uncoveredImage; //initialize in constructor depending on the type
     private ImageIcon display; //what the tile actually looks like
     private boolean isFlagged = false;
+    private boolean isRevealed = false;
     private int type;
     private Board board; //reference to the board class
     public int x, y; //storing the x and y of tiles for the purpose of board class
@@ -74,12 +75,25 @@ public class Tile extends JLabel {
     }
 
     public void revealTile() {
+        isRevealed = true;
         if (!board.isFilled()) {
             board.fill(x, y);
         }
         display = uncoveredImage;
         super.setIcon(display);
-        System.out.println(x + " " + y);
+        if (type == 0) {
+            board.floodFill(x, y);
+        }
+    }
+
+    //to prevent infinite recursion (copy of the method, just doesn't call floodfill again)
+    public void reveal() {
+        isRevealed = true;
+        if (!board.isFilled()) {
+            board.fill(x, y);
+        }
+        display = uncoveredImage;
+        super.setIcon(display);
     }
 
     public void flagTile() {
@@ -100,6 +114,10 @@ public class Tile extends JLabel {
 
     public boolean isFlagged() {
         return isFlagged;
+    }
+
+    public boolean isRevealed() {
+        return isRevealed;
     }
 
     public int getType() {
