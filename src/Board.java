@@ -1,3 +1,5 @@
+import java.awt.*;
+
 public class Board {
 
     private int l, w, m; //length, width,
@@ -196,5 +198,9 @@ public class Board {
 
     public boolean isFilled() {
         return filled;
+    }
+
+    public void paint(Graphics g) {
+
     }
 }
