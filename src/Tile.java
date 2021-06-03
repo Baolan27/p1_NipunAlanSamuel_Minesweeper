@@ -36,10 +36,12 @@ public class Tile extends JLabel {
                 if (SwingUtilities.isLeftMouseButton(e)) {
                     revealTile();
                 } else if (SwingUtilities.isRightMouseButton(e)) {
-                    if (!isFlagged) {
-                        flagTile();
-                    } else {
-                        unFlagTile();
+                    if (!isRevealed) {
+                        if (!isFlagged) {
+                            flagTile();
+                        } else {
+                            unFlagTile();
+                        }
                     }
                 }
             }

@@ -7,7 +7,7 @@ public class Board {
     public Board() { //default is intermediate
         l = 16;
         w = 16;
-        m = 31;
+        m = 35;
         board = new Tile[l][w];
         fillTemp();
         filled = false; //not filled until the proper fill() method is called, not fillTemp()
