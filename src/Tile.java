@@ -13,9 +13,13 @@ public class Tile extends JLabel {
     private int type;
     private Board board; //reference to the board class
     public int x, y; //storing the x and y of tiles for the purpose of board class
+    private Music boom;
+    private Music flag;
 
     //0 = empty tile, 1 = number tile, 2 = mine tile
     public Tile(int type, Board b, int x, int y) {
+    	boom = new Music("boom.wav",false);
+    	flag = new Music("flag.wav", false);
         this.type = type;
         if (type == 0) {
             //set uncovered image to an empty space
@@ -104,6 +108,7 @@ public class Tile extends JLabel {
         display = coverImage;
         super.setIcon(display);
         isFlagged = true;
+       
     }
 
     public void unFlagTile() {
@@ -139,6 +144,7 @@ public class Tile extends JLabel {
         } else if (type == 9) {
             //set uncovered image to a mine
             uncoveredImage = new ImageIcon("src/Images/mine.png", "Tile with mine image");
+            
         }
         display = coverImage;
         super.setIcon(display);
