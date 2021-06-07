@@ -36,10 +36,8 @@ public class Music implements Runnable  {
 			AudioFormat format = audioStream.getFormat();
 	        DataLine.Info info = new DataLine.Info(Clip.class, format);
 	        audioClip = (Clip) AudioSystem.getLine(info);
-	        
-	              
 	        audioClip.open(audioStream);
-	        audioClip.start();
+	        //audioClip.start();
 		} catch (UnsupportedAudioFileException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

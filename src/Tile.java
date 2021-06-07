@@ -90,9 +90,12 @@ public class Tile extends JLabel {
         if (type == 0) {
             board.floodFill(x, y);
         }
+        if (type == 9) {
+            boom.play();
+        }
     }
 
-    //to prevent infinite recursion (copy of the method, just doesn't call floodfill again)
+    //to prevent infinite recursion (copy of the method, just doesn't call flood-fill again)
     public void reveal() {
         isRevealed = true;
         if (!board.isFilled()) {
@@ -108,7 +111,7 @@ public class Tile extends JLabel {
         display = coverImage;
         super.setIcon(display);
         isFlagged = true;
-       
+        flag.play();
     }
 
     public void unFlagTile() {
@@ -142,7 +145,6 @@ public class Tile extends JLabel {
         } else if (type == 9) {
             //set uncovered image to a mine
             uncoveredImage = new ImageIcon("src/Images/mine.png", "Tile with mine image");
-            
         }
         display = coverImage;
         super.setIcon(display);

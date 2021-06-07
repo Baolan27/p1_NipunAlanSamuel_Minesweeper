@@ -18,7 +18,7 @@ public class GUI extends JLabel implements MouseListener, ActionListener {
 		
 		//music
 		bgm = new Music("backgroundmusic.wav",true);
-		//bgm.play();
+		bgm.play();
 
 		//JFrame setup
 		frame = new JFrame("Minesweeper");
