@@ -97,6 +97,7 @@ public class GUI extends JLabel implements MouseListener, ActionListener {
 		frame.add(this);
 		g.setColor(Color.black);
 		g.fillRect(0, 0, 100, 100);
+
 		*/
 	}
 
