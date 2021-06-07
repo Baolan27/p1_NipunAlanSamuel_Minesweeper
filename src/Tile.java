@@ -4,7 +4,7 @@ import java.awt.event.MouseListener;
 import javax.swing.SwingUtilities;
 
 public class Tile extends JLabel {
-
+	// instance variables
     private ImageIcon coverImage = new ImageIcon("src/Images/tile.png", "Uncovered tile image"); //initialize with generic tile image (same for all tiles)
     private ImageIcon uncoveredImage; //initialize in constructor depending on the type
     private ImageIcon display; //what the tile actually looks like
