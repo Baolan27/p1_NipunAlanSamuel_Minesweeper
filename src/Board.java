@@ -200,7 +200,27 @@ public class Board {
         return filled;
     }
 
-    public void paint(Graphics g) {
+    public boolean won() {
+        int count = 0;
+        for (Tile[] T: board) {
+            for (Tile t : T) {
+                if (t.isRevealed()) {
+                    if (t.getType() == 9) return false;
+                    else count++;
+                }
+            }
+        }
+        return (count == l*w - m && !lost());
+    }
 
+    public boolean lost() {
+        for (Tile[] T: board) {
+            for (Tile t: T) {
+                if (t.isRevealed() && t.getType() == 9) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

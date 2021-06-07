@@ -39,7 +39,7 @@ public class Music implements Runnable  {
 	        
 	              
 	        audioClip.open(audioStream);
-	        //audioClip.start();
+	        audioClip.start();
 		} catch (UnsupportedAudioFileException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

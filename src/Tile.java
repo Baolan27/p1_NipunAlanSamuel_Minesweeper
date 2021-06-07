@@ -126,8 +126,6 @@ public class Tile extends JLabel {
         return type;
     }
 
-
-
     public void changeType(int type) {
         this.type = type;
         if (type == 0) {
