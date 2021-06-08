@@ -1,6 +1,8 @@
 import javax.swing.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import javax.swing.SwingUtilities;
 
 public class Tile extends JLabel {
@@ -34,6 +36,7 @@ public class Tile extends JLabel {
         display = coverImage;
         super.setIcon(display);
 
+        //reveals tile if left clicked, flags if right clicked
         this.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
