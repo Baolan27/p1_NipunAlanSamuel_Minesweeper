@@ -6,6 +6,7 @@ public class Board {
     private Tile[][] board; //storing the tiles in a 2d array
     private boolean filled; //checks if the board is filled yet or just has empty tiles
 
+    
     public Board() { //default is intermediate
         l = 16;
         w = 16;
