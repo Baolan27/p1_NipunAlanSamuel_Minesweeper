@@ -11,17 +11,21 @@ public class GUI extends JLabel implements MouseListener, ActionListener {
 	Board board;
 	JFrame frame;
 	Music bgm;
-	Timer timer = new Timer(16, this);
+	GridLayout layout;
+
 	//timer
-	 JLabel timeLabel = new JLabel();
-	 int elapsedTime = 0;
-	 int seconds =0;
-	 int minutes =0;
-	 int hours =0;
-	 boolean started = false;
-	 String seconds_string = String.format("%02d", seconds);
-	 String minutes_string = String.format("%02d", minutes);
-	 String hours_string = String.format("%02d", hours);
+	Timer timer = new Timer(16, this);
+
+	//time label stuff
+	JLabel timeLabel = new JLabel();
+	int elapsedTime = 0;
+	int seconds = 0;
+	int minutes = 0;
+	int hours = 0;
+	boolean started = false;
+	String seconds_string = String.format("%02d", seconds);
+	String minutes_string = String.format("%02d", minutes);
+	String hours_string = String.format("%02d", hours);
 	 
 	 
 	public GUI() {
@@ -36,8 +40,6 @@ public class GUI extends JLabel implements MouseListener, ActionListener {
 
 		//JFrame setup
 		frame = new JFrame("Minesweeper");
-		JPanel panel = new JPanel();
-		JPanel extraPanel = new JPanel(new FlowLayout(FlowLayout.LEADING));
 		frame.setPreferredSize(new Dimension(750, 900));
 		
 		// timer
@@ -51,7 +53,7 @@ public class GUI extends JLabel implements MouseListener, ActionListener {
 		timer.start();
 
 		frame.pack();	
-		GridLayout layout = new GridLayout(0, board.getL());
+		layout = new GridLayout(0, board.getL());
 		layout.setHgap(3);
 		layout.setVgap(3);
 		frame.setLayout(layout);
@@ -65,14 +67,11 @@ public class GUI extends JLabel implements MouseListener, ActionListener {
 			}
 		}
 
-		//frame.add(timeLabel);
+		frame.add(timeLabel);
 
-		extraPanel.add(panel);
-		frame.add(extraPanel, BorderLayout.CENTER);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setTitle("Minesweeper");
 		frame.setVisible(true);
-	
 	}
 
 	 Timer timer1 = new Timer(1000, new ActionListener() {
@@ -125,13 +124,6 @@ public class GUI extends JLabel implements MouseListener, ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		repaint();
-		if (board.lost()) {
-			frame = new JFrame("Minesweeper");
-			frame.removeAll();
-		} else if (board.won()) {
-			System.out.println("won");
-			frame = new JFrame("Minesweeper");
-		}
 	}
 
 	 
@@ -144,22 +136,28 @@ public class GUI extends JLabel implements MouseListener, ActionListener {
 	 }
 	 
 	 void reset() {
-	  timer.stop();
-	  elapsedTime=0;
-	  seconds =0;
-	  minutes=0;
-	  hours=0;
-	  seconds_string = String.format("%02d", seconds);
-	  minutes_string = String.format("%02d", minutes);
-	  hours_string = String.format("%02d", hours);       timeLabel.setText(hours_string+":"+minutes_string+":"+seconds_string);
+		timer.stop();
+		elapsedTime = 0;
+		seconds = 0;
+		minutes = 0;
+		hours = 0;
+		seconds_string = String.format("%02d", seconds);
+		minutes_string = String.format("%02d", minutes);
+		hours_string = String.format("%02d", hours);
+		timeLabel.setText(hours_string+":"+minutes_string+":"+seconds_string);
 	 }
 	
 	
 	public void paint(Graphics g) {
 		if (board.lost()) {
+			//frame = new JFrame();
+			frame.getContentPane().removeAll();
 			frame.getContentPane().setBackground(Color.black);
+			g.drawRect(0, 0, 750, 900);
 			g.setFont(Font.getFont(Font.SANS_SERIF));
+			g.setColor(Color.gray);
 			g.drawString("You Lost!", 50, 50);
+			frame.revalidate();
 		}
 	}
 
