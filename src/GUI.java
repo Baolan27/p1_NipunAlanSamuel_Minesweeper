@@ -38,7 +38,7 @@ public class GUI extends JLabel implements MouseListener, ActionListener {
 		   seconds_string = String.format("%02d", seconds);
 		   minutes_string = String.format("%02d", minutes);
 		   hours_string = String.format("%02d", hours);
-		   timeLabel.setText(hours_string+":"+minutes_string+":"+seconds_string);
+		   timeLabel.setText(seconds_string);
 		   if(seconds%5==0) {System.out.println("5 sec passed");}
 		  }
 		  
@@ -63,7 +63,7 @@ public class GUI extends JLabel implements MouseListener, ActionListener {
 		// timer
 		timeLabel.setText(hours_string+":"+minutes_string+":"+seconds_string);
 		timeLabel.setBounds(100,100,200,100);
-		timeLabel.setFont(new Font("Verdana",Font.PLAIN,35));
+		timeLabel.setFont(new Font("Verdana",Font.PLAIN,30));
 		timeLabel.setBorder(BorderFactory.createBevelBorder(1));
 		timeLabel.setOpaque(true);
 		timeLabel.setHorizontalAlignment(JTextField.CENTER);
