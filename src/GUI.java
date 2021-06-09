@@ -152,12 +152,13 @@ public class GUI extends JLabel implements MouseListener, ActionListener {
 		if (board.lost()) {
 			//frame = new JFrame();
 			frame.getContentPane().removeAll();
+			
 			frame.getContentPane().setBackground(Color.black);
 			g.drawRect(0, 0, 750, 900);
 			g.setFont(Font.getFont(Font.SANS_SERIF));
 			g.setColor(Color.gray);
 			g.drawString("You Lost!", 50, 50);
-			frame.revalidate();
+			//frame.revalidate();
 		}
 	}
 
