@@ -27,6 +27,24 @@ public class GUI extends JLabel implements MouseListener, ActionListener {
 	String minutes_string = String.format("%02d", minutes);
 	String hours_string = String.format("%02d", hours);
 	 
+	 Timer timer1 = new Timer(1000, new ActionListener() {
+		  
+		  public void actionPerformed(ActionEvent e) {
+		   
+		   elapsedTime=elapsedTime+1000;
+		   hours = (elapsedTime/3600000);
+		   minutes = (elapsedTime/60000) % 60;
+		   seconds = (elapsedTime/1000) % 60;
+		   seconds_string = String.format("%02d", seconds);
+		   minutes_string = String.format("%02d", minutes);
+		   hours_string = String.format("%02d", hours);
+		   timeLabel.setText(hours_string+":"+minutes_string+":"+seconds_string);
+		   if(seconds%5==0) {System.out.println("5 sec passed");}
+		  }
+		  
+		
+		  
+		 });
 	 
 	public GUI() {
 		//Stopwatch stopwatch = new Stopwatch();
@@ -50,7 +68,7 @@ public class GUI extends JLabel implements MouseListener, ActionListener {
 		timeLabel.setOpaque(true);
 		timeLabel.setHorizontalAlignment(JTextField.CENTER);
 		// start timer
-		timer.start();
+		timer1.start();
 
 		frame.pack();	
 		layout = new GridLayout(0, board.getL());
@@ -74,22 +92,7 @@ public class GUI extends JLabel implements MouseListener, ActionListener {
 		frame.setVisible(true);
 	}
 
-	 Timer timer1 = new Timer(1000, new ActionListener() {
-		  
-		  public void actionPerformed(ActionEvent e) {
-		   
-		   elapsedTime=elapsedTime+1000;
-		   hours = (elapsedTime/3600000);
-		   minutes = (elapsedTime/60000) % 60;
-		   seconds = (elapsedTime/1000) % 60;
-		   seconds_string = String.format("%02d", seconds);
-		   minutes_string = String.format("%02d", minutes);
-		   hours_string = String.format("%02d", hours);
-		   timeLabel.setText(hours_string+":"+minutes_string+":"+seconds_string);
-		   
-		  }
-		  
-		 });
+	
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -126,7 +129,6 @@ public class GUI extends JLabel implements MouseListener, ActionListener {
 		repaint();
 	}
 
-	 
 	 void start() {
 	  timer.start();
 	 }

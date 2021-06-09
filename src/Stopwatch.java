@@ -33,7 +33,7 @@ public class Stopwatch {
 	   minutes_string = String.format("%02d", minutes);
 	   hours_string = String.format("%02d", hours);
 	   timeLabel.setText(hours_string+":"+minutes_string+":"+seconds_string);
-	   
+	   if (seconds%5==0) {System.out.println("1");}
 	  }
 	  
 	 });
