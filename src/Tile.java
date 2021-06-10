@@ -13,13 +13,15 @@ public class Tile extends JLabel {
     private boolean isFlagged = false;
     private boolean isRevealed = false;
     private int type;
-    private Board board; //reference to the board class
+    private Board board; //reference to current board object
+    private GUI g; //reference to current GUI object
     public int x, y; //storing the x and y of tiles for the purpose of board class
     public Music boom;
     private Music flag;
+    private boolean sound;
 
     //0 = empty tile, 1 = number tile, 2 = mine tile
-    public Tile(int type, Board b, int x, int y) {
+    public Tile(int type, Board b, int x, int y, GUI g) {
     	boom = new Music("boom.wav",false);
     	flag = new Music("flag.wav", false);
         this.type = type;
@@ -93,7 +95,8 @@ public class Tile extends JLabel {
         if (type == 0) {
             board.floodFill(x, y);
         }
-        if (type == 9) {
+        sound = g.sound;
+        if (type == 9 && sound) {
             boom.play();
         }
     }
@@ -114,7 +117,9 @@ public class Tile extends JLabel {
         display = coverImage;
         super.setIcon(display);
         isFlagged = true;
-        flag.play();
+        if (sound) {
+            flag.play();
+        }
     }
 
     public void unFlagTile() {

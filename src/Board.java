@@ -5,15 +5,17 @@ public class Board {
     private int l, w, m; //length, width,
     private Tile[][] board; //storing the tiles in a 2d array
     private boolean filled; //checks if the board is filled yet or just has empty tiles
+    private GUI g;
 
     
-    public Board() { //default is intermediate
+    public Board(GUI g) { //default is intermediate
         l = 16;
         w = 16;
         m = 35;
         board = new Tile[l][w];
         fillTemp();
         filled = false; //not filled until the proper fill() method is called, not fillTemp()
+        this.g = g;
     }
 
     public Board(int length, int width, int numMines) { //custom game, beginner (9,9,10), expert (16,30,99)
@@ -29,7 +31,7 @@ public class Board {
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[i].length; j++) {
                 if (j == 15) {
-                    board[i][j] = new Tile(0, this, i, 0);
+                    board[i][j] = new Tile(0, this, i, 0, g);
                 } else {
                     if (i == j) {
                         x = 15;
@@ -37,7 +39,7 @@ public class Board {
                     } else {
                         x--;
                     }
-                    board[i][j] = new Tile(0, this, x, y);
+                    board[i][j] = new Tile(0, this, x, y, g);
                 }
             }
         }

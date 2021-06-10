@@ -16,7 +16,9 @@ public class GUI extends JLabel implements MouseListener, ActionListener {
 	//insane mode
 	boolean insane;
 	boolean lost;
-	
+
+	//turning sound off and on
+	public boolean sound;
 	
 	//timer
 	Timer timer = new Timer(16, this);
@@ -63,11 +65,15 @@ public class GUI extends JLabel implements MouseListener, ActionListener {
 		//Stopwatch stopwatch = new Stopwatch();
 		
 		//initializing board and label storage  
-		board = new Board();
+		board = new Board(this);
 		
 		//insane mode
-		insane= true;
+		insane= false;
 		lost = false;
+
+		//sound settings
+		sound = true;
+
 		//music
 		bgm = new Music("backgroundmusic.wav",true);
 		bgm.play();
@@ -103,10 +109,31 @@ public class GUI extends JLabel implements MouseListener, ActionListener {
 
 		frame.add(timeLabel);
 
+		JButton switchInsane = new JButton();
+		switchInsane.setText("I");
+		switchInsane.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				insane = !insane;
+			}
+		});
+		frame.add(switchInsane);
+
+		JButton switchSound = new JButton();
+		switchSound.setText("S");
+		switchSound.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				sound = !sound;
+			}
+		});
+		frame.add(switchSound);
+
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setTitle("Minesweeper");
 		frame.setVisible(true);
 	}
+
 	public boolean insanerng () {
 		System.out.println("algo");
 		int x = (int)(Math.random()*board.getW());
@@ -117,11 +144,6 @@ public class GUI extends JLabel implements MouseListener, ActionListener {
 		}
 		return (board.getTile(x, y).getType()==9);
 	}
-
-	
-	
-	
-	
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -189,6 +211,9 @@ public class GUI extends JLabel implements MouseListener, ActionListener {
 			g.drawString("You Lost!", 50, 50);
 			System.out.println("lost");
 			//frame.revalidate();
+		}
+		if (!sound) {
+			bgm.stop();
 		}
 	}
 
