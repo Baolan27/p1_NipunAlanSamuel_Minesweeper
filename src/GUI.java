@@ -12,7 +12,12 @@ public class GUI extends JLabel implements MouseListener, ActionListener {
 	JFrame frame;
 	Music bgm;
 	GridLayout layout;
-
+	
+	//insane mode
+	boolean insane;
+	boolean lost;
+	
+	
 	//timer
 	Timer timer = new Timer(16, this);
 
@@ -39,7 +44,15 @@ public class GUI extends JLabel implements MouseListener, ActionListener {
 		   minutes_string = String.format("%02d", minutes);
 		   hours_string = String.format("%02d", hours);
 		   timeLabel.setText(seconds_string);
-		   if(seconds%5==0) {System.out.println("5 sec passed");}
+		   if(seconds%5==0) {System.out.println("5 sec passed");
+		   if(insane) {if(insanerng()) {
+			  System.out.println("mine");
+			  board.getTile(0, 0).boom.play();
+			   
+		   }}
+		   
+		   
+		   }
 		  }
 		  
 		
@@ -52,6 +65,9 @@ public class GUI extends JLabel implements MouseListener, ActionListener {
 		//initializing board and label storage  
 		board = new Board();
 		
+		//insane mode
+		insane= true;
+		lost = false;
 		//music
 		bgm = new Music("backgroundmusic.wav",true);
 		bgm.play();
@@ -91,7 +107,20 @@ public class GUI extends JLabel implements MouseListener, ActionListener {
 		frame.setTitle("Minesweeper");
 		frame.setVisible(true);
 	}
+	public boolean insanerng () {
+		System.out.println("algo");
+		int x = (int)(Math.random()*board.getW());
+		int y = (int)(Math.random()*board.getL());
+		if(board.getTile(x,y).isRevealed()){insanerng();}
+		if(!board.getTile(x,y).isRevealed()) {
+			board.getTile(x,y).reveal();
+		}
+		return (board.getTile(x, y).getType()==9);
+	}
 
+	
+	
+	
 	
 
 	public static void main(String[] args) {
@@ -148,10 +177,8 @@ public class GUI extends JLabel implements MouseListener, ActionListener {
 		hours_string = String.format("%02d", hours);
 		timeLabel.setText(hours_string+":"+minutes_string+":"+seconds_string);
 	 }
-	
-	
 	public void paint(Graphics g) {
-		if (board.lost()) {
+		if (board.lost()||lost) {
 			//frame = new JFrame();
 			frame.getContentPane().removeAll();
 			
@@ -160,6 +187,7 @@ public class GUI extends JLabel implements MouseListener, ActionListener {
 			g.setFont(Font.getFont(Font.SANS_SERIF));
 			g.setColor(Color.gray);
 			g.drawString("You Lost!", 50, 50);
+			System.out.println("lost");
 			//frame.revalidate();
 		}
 	}
