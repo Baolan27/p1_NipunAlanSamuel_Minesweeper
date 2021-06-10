@@ -15,7 +15,7 @@ public class Tile extends JLabel {
     private int type;
     private Board board; //reference to the board class
     public int x, y; //storing the x and y of tiles for the purpose of board class
-    private Music boom;
+    public Music boom;
     private Music flag;
 
     //0 = empty tile, 1 = number tile, 2 = mine tile
