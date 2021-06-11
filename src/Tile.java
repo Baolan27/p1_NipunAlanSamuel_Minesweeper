@@ -121,6 +121,13 @@ public class Tile extends JLabel {
             flag.play();
         }
     }
+    
+    public void happyTile() {
+    	//happy face tile
+    	coverImage = new ImageIcon("src/Images/smile.png", "Tile with flag");
+        display = coverImage;
+        super.setIcon(display);
+    }
 
     public void unFlagTile() {
         //removing the flag from a flagged tile

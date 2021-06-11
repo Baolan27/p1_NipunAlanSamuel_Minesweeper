@@ -46,6 +46,7 @@ public class GUI extends JLabel implements MouseListener, ActionListener {
 		   minutes_string = String.format("%02d", minutes);
 		   hours_string = String.format("%02d", hours);
 		   timeLabel.setText(seconds_string);
+		   revealBombs();
 		   if(seconds%5==0) {System.out.println("5 sec passed");
 		   if(insane) {if(insanerng()) {
 			  System.out.println("mine");
@@ -76,7 +77,7 @@ public class GUI extends JLabel implements MouseListener, ActionListener {
 
 		//music
 		bgm = new Music("backgroundmusic.wav",true);
-		bgm.play();
+		//bgm.play();
 
 		//JFrame setup
 		frame = new JFrame("Minesweeper");
@@ -144,6 +145,25 @@ public class GUI extends JLabel implements MouseListener, ActionListener {
 		}
 		return (board.getTile(x, y).getType()==9);
 	}
+	
+	// idk which class id assume gui
+	public void revealBombs() {
+	  for (int i = 0; i < board.getL(); i++) {
+	    for (int j = 0; j < board.getW(); j++) {
+	      if (board.getTile(i,j).getType() == 9) {
+	        if (board.won()) {
+	        	System.out.println("w");
+	          board.getTile(i, j).happyTile();
+	        }
+	        if (board.lost()) {
+	        	System.out.println("l");
+	          board.getTile(i, j).reveal();
+	        }
+	      }
+	    }
+	  }
+	}
+	
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
