@@ -99,8 +99,11 @@ public class GUI extends JLabel implements MouseListener, ActionListener {
 		frame.add(timeLabel);
 
 		//buttons for toggling mode and sound
-		JButton switchInsane = new JButton();
-		switchInsane.setText("I");
+		
+		Icon sounds = new ImageIcon("src/Images/sound.png");
+		Icon insanem = new ImageIcon("src/Images/insane.png");
+		JButton switchInsane = new JButton(insanem);
+		switchInsane.setText("S");
 		switchInsane.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -108,9 +111,9 @@ public class GUI extends JLabel implements MouseListener, ActionListener {
 			}
 		});
 		frame.add(switchInsane);
-
-		JButton switchSound = new JButton();
-		switchSound.setText("S");
+		
+		JButton switchSound = new JButton(sounds);
+		//switchSound.setText("i");
 		switchSound.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
