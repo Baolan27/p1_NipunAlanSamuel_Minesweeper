@@ -100,24 +100,28 @@ public class GUI extends JLabel implements MouseListener, ActionListener {
 
 		//buttons for toggling mode and sound
 		
-		Icon sounds = new ImageIcon("src/Images/sound.png");
-		Icon insanem = new ImageIcon("src/Images/insane.png");
-		JButton switchInsane = new JButton(insanem);
-		switchInsane.setText("S");
+		Icon soundon = new ImageIcon("src/Images/sound.png");
+		Icon mute = new ImageIcon("src/Images/mute.png");
+		Icon insaneon = new ImageIcon("src/Images/insane.png");
+		JButton switchInsane = new JButton(insaneon);
 		switchInsane.addActionListener(new ActionListener() {
-			@Override
+
 			public void actionPerformed(ActionEvent e) {
 				insane = !insane;
+				switchInsane.setIcon(insaneon);
 			}
 		});
 		frame.add(switchInsane);
 		
-		JButton switchSound = new JButton(sounds);
+		JButton switchSound = new JButton(soundon);
+		
 		//switchSound.setText("i");
 		switchSound.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				sound = !sound;
+				if(sound) {switchSound.setIcon(soundon);}
+				if(!sound) {switchSound.setIcon(mute);}
 			}
 		});
 		frame.add(switchSound);
