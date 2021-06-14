@@ -7,18 +7,18 @@ public class Board {
     private boolean filled; //checks if the board is filled yet or just has empty tiles
     private GUI g;
 
-    
     public Board(GUI g) { //default is intermediate
+        this.g = g;
         l = 16;
         w = 16;
         m = 35;
         board = new Tile[l][w];
         fillTemp();
         filled = false; //not filled until the proper fill() method is called, not fillTemp()
-        this.g = g;
     }
 
     public Board(int length, int width, int numMines) { //custom game, beginner (9,9,10), expert (16,30,99)
+        this.g = g;
         l = length;
         w = width;
         m = numMines;

@@ -1,23 +1,17 @@
-
 import java.io.File;
-import java.io.IOException;
-
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.DataLine;
-import javax.sound.sampled.LineEvent;
-import javax.sound.sampled.LineListener;
-import javax.sound.sampled.UnsupportedAudioFileException;
 
-public class Music implements Runnable  {
+public class Music implements Runnable {
 	
 	private Thread t;
 	private File audioFile ;
 	private AudioInputStream audioStream;
 	private Clip audioClip;
-	private String fn;
+	private final String fn;
 	private boolean loops = false;
 	
 	/**
@@ -38,9 +32,6 @@ public class Music implements Runnable  {
 	        audioClip = (Clip) AudioSystem.getLine(info);
 	        audioClip.open(audioStream);
 	        //audioClip.start();
-		} catch (UnsupportedAudioFileException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -53,38 +44,34 @@ public class Music implements Runnable  {
 	public void stop() {
 		audioClip.stop();
 	}
-	
-	
-	
+
 	/*
 	 * Start the music. If the object was created with loops set to true then
 	 * it will loop otherwise it will be played once. 
 	 */
 	public void play() {		
-		if(loops==false) {
+		if(!loops) {
 			audioClip.start();
-		}else {
+		} else {
 			start3();
 		}
 	}
-	
-	
-	
+
 	int count = 0;
 	private void start3() {
-		
 	     t = new Thread (this, "run");
-	     if(audioClip.isActive()==false && loops || count == 0) {
+	     if(!audioClip.isActive() && loops || count == 0) {
 	    	 count++;
 	    	 start2();
 	     }
-	    
 	     t.start();
 	}
+
 	private void start() {
-	     t = new Thread (this, "run");
-	     t.start ();
+	     t = new Thread(this, "run");
+	     t.start();
 	}
+
 	private void start2() {
 		audioFile = new File(fn);
 		try {
@@ -94,9 +81,6 @@ public class Music implements Runnable  {
 	        audioClip = (Clip) AudioSystem.getLine(info);
 	        audioClip.open(audioStream);
 	        audioClip.start();
-		} catch (UnsupportedAudioFileException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -108,6 +92,5 @@ public class Music implements Runnable  {
 		// audioClip.start();
 		play();
 	}
-	
 
 }

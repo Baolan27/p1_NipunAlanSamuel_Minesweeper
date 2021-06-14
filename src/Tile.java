@@ -1,8 +1,6 @@
 import javax.swing.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import javax.swing.SwingUtilities;
 
 public class Tile extends JLabel {
@@ -79,6 +77,7 @@ public class Tile extends JLabel {
         board = b; //storing a reference to board to detect first click
         this.x = x; //x-coordinate of tile in board
         this.y = y; //y-coordinate of tile in board
+        this.g = g; //storing a reference to GUI
     }
 
     public ImageIcon getTileImage() {
