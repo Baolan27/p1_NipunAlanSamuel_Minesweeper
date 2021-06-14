@@ -11,11 +11,11 @@ public class Tile extends JLabel {
     private boolean isFlagged = false;
     private boolean isRevealed = false;
     private int type;
-    private Board board; //reference to current board object
-    private GUI g; //reference to current GUI object
+    private final Board board; //reference to current board object
+    private final GUI g; //reference to current GUI object
     public int x, y; //storing the x and y of tiles for the purpose of board class
     public Music boom;
-    private Music flag;
+    private final Music flag;
     private boolean sound;
 
     //0 = empty tile, 1 = number tile, 2 = mine tile
@@ -116,6 +116,7 @@ public class Tile extends JLabel {
         display = coverImage;
         super.setIcon(display);
         isFlagged = true;
+        sound = g.sound;
         if (sound) {
             flag.play();
         }

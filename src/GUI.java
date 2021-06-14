@@ -65,7 +65,7 @@ public class GUI extends JLabel implements MouseListener, ActionListener {
 
 		//music
 		bgm = new Music("backgroundmusic.wav",true);
-		//bgm.play();
+		bgm.play();
 
 		//JFrame setup
 		frame = new JFrame("Minesweeper");
@@ -212,8 +212,8 @@ public class GUI extends JLabel implements MouseListener, ActionListener {
 	}
 
 	public void paint(Graphics g) {
-		//if (board.lost()||lost) {
-			/*
+		/*
+		if (board.lost()||lost) {
 			//frame = new JFrame();
 			frame.getContentPane().removeAll();
 			frame.getContentPane().setBackground(Color.black);
@@ -224,8 +224,8 @@ public class GUI extends JLabel implements MouseListener, ActionListener {
 			System.out.println("lost");
 			//frame.revalidate();
 		}
-
-			 */
+		*/
+		System.out.println(sound);
 		if (!sound) {
 			bgm.stop();
 		}

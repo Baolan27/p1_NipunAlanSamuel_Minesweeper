@@ -45,6 +45,10 @@ public class Music implements Runnable {
 		audioClip.stop();
 	}
 
+	public void mute() {
+
+	}
+
 	/*
 	 * Start the music. If the object was created with loops set to true then
 	 * it will loop otherwise it will be played once. 
