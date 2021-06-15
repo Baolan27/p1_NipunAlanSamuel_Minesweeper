@@ -3,6 +3,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.IOException;
 import javax.swing.*;
 
 public class GUI extends JLabel implements MouseListener, ActionListener {
@@ -38,7 +39,7 @@ public class GUI extends JLabel implements MouseListener, ActionListener {
 			elapsedTime = elapsedTime + 1000;
 		  	hours = (elapsedTime / 3600000);
 		  	minutes = (elapsedTime / 60000) % 60;
-		  	seconds = (elapsedTime / 1000) % 60;
+		  	seconds = (elapsedTime / 1000);
 		  	seconds_string = String.format("%02d", seconds);
 		  	minutes_string = String.format("%02d", minutes);
 		  	hours_string = String.format("%02d", hours);
@@ -57,7 +58,7 @@ public class GUI extends JLabel implements MouseListener, ActionListener {
 		board = new Board(this);
 		
 		//insane mode
-		insane= false;
+		insane = false;
 		lost = false;
 
 		//sound settings
@@ -65,7 +66,7 @@ public class GUI extends JLabel implements MouseListener, ActionListener {
 
 		//music
 		bgm = new Music("backgroundmusic.wav",true);
-		//bgm.play();
+		bgm.play();
 
 		//JFrame setup
 		frame = new JFrame("Minesweeper");
@@ -81,10 +82,13 @@ public class GUI extends JLabel implements MouseListener, ActionListener {
 		// start timer
 		timer1.start();
 
+		//starting original timer (used for repainting)
+		timer.start();
+
 		frame.pack();	
 		layout = new GridLayout(0, board.getL());
-		layout.setHgap(3);
-		layout.setVgap(3);
+		layout.setHgap(1);
+		layout.setVgap(1);
 		frame.setLayout(layout);
 		frame.getContentPane().setBackground(Color.gray);
 		frame.add(this);
@@ -96,10 +100,11 @@ public class GUI extends JLabel implements MouseListener, ActionListener {
 			}
 		}
 
+		JLabel blank = new JLabel();
+		//frame.add(blank);
 		frame.add(timeLabel);
 
 		//buttons for toggling mode and sound
-		
 		Icon soundon = new ImageIcon("src/Images/sound.png");
 		Icon mute = new ImageIcon("src/Images/mute.png");
 		Icon insaneon = new ImageIcon("src/Images/insane.png");
@@ -122,8 +127,15 @@ public class GUI extends JLabel implements MouseListener, ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				sound = !sound;
-				if(sound) {switchSound.setIcon(soundon);}
-				if(!sound) {switchSound.setIcon(mute);}
+				if(sound) {
+					switchSound.setIcon(soundon);
+					//bgm = new Music("backgroundmusic.wav",true);
+					//bgm.play();
+				}
+				if(!sound) {
+					switchSound.setIcon(mute);
+					bgm.stop();
+				}
 			}
 		});
 		frame.add(switchSound);
@@ -152,11 +164,9 @@ public class GUI extends JLabel implements MouseListener, ActionListener {
 	    for (int j = 0; j < board.getW(); j++) {
 	      if (board.getTile(i,j).getType() == 9) {
 	        if (board.won()) {
-	        	System.out.println("w");
 	          	board.getTile(i, j).happyTile();
 	        }
 	        if (board.lost()) {
-	        	System.out.println("l");
 	          	board.getTile(i, j).reveal();
 	        }
 	      }
@@ -201,15 +211,15 @@ public class GUI extends JLabel implements MouseListener, ActionListener {
 	}
 
 	void start() {
-	  timer.start();
+	  timer1.start();
 	}
 	 
 	void stop() {
-	  timer.stop();
+	  timer1.stop();
 	}
 	 
 	void reset() {
-		timer.stop();
+		timer1.stop();
 		elapsedTime = 0;
 		seconds = 0;
 		minutes = 0;
@@ -221,23 +231,6 @@ public class GUI extends JLabel implements MouseListener, ActionListener {
 	}
 
 	public void paint(Graphics g) {
-		/*
-		if (board.lost()||lost) {
-			//frame = new JFrame();
-			frame.getContentPane().removeAll();
-			frame.getContentPane().setBackground(Color.black);
-			g.drawRect(0, 0, 750, 900);
-			g.setFont(Font.getFont(Font.SANS_SERIF));
-			g.setColor(Color.gray);
-			g.drawString("You Lost!", 50, 50);
-			System.out.println("lost");
-			//frame.revalidate();
-		}
-		*/
-		System.out.println(sound);
-		if (!sound) {
-			bgm.stop();
-		}
 	}
 
 }

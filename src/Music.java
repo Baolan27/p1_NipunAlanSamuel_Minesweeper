@@ -4,6 +4,7 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.DataLine;
+import javax.sound.sampled.BooleanControl;
 
 public class Music implements Runnable {
 	
@@ -13,6 +14,7 @@ public class Music implements Runnable {
 	private Clip audioClip;
 	private final String fn;
 	private boolean loops = false;
+	private BooleanControl muteControl;
 	
 	/**
 	 * Create a music object from a given file name. 
@@ -31,7 +33,8 @@ public class Music implements Runnable {
 	        DataLine.Info info = new DataLine.Info(Clip.class, format);
 	        audioClip = (Clip) AudioSystem.getLine(info);
 	        audioClip.open(audioStream);
-	        //audioClip.start();
+	        //for muting
+			muteControl = (BooleanControl) audioClip.getControl(BooleanControl.Type.MUTE);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -43,10 +46,13 @@ public class Music implements Runnable {
 	 */
 	public void stop() {
 		audioClip.stop();
+		audioClip.flush();
 	}
 
 	public void mute() {
-
+		muteControl.setValue(true);
+		audioClip.loop(0);
+		audioClip.flush();
 	}
 
 	/*
