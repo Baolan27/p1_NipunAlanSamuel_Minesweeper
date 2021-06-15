@@ -13,6 +13,9 @@ public class GUI extends JLabel implements MouseListener, ActionListener {
 	JFrame frame;
 	Music bgm;
 	GridLayout layout;
+
+	//GUI reference
+	GUI gui = this;
 	
 	//insane mode
 	boolean insane;
@@ -107,11 +110,12 @@ public class GUI extends JLabel implements MouseListener, ActionListener {
 		}
 		frame.add(timeLabel);
 
-		//buttons for toggling mode and sound
+		//buttons for toggling mode and sound and playing again
 		Icon soundon = new ImageIcon("src/Images/sound.png");
 		Icon mute = new ImageIcon("src/Images/mute.png");
 		Icon insaneon = new ImageIcon("src/Images/insane.png");
 		Icon insaneoff = new ImageIcon("src/Images/regmode.png");
+		Icon replay = new ImageIcon("src/Images/restart.png");
 		JButton switchInsane = new JButton(insaneoff);
 		switchInsane.addActionListener(new ActionListener() {
 
@@ -124,8 +128,7 @@ public class GUI extends JLabel implements MouseListener, ActionListener {
 		frame.add(switchInsane);
 		
 		JButton switchSound = new JButton(soundon);
-		
-		//switchSound.setText("i");
+
 		switchSound.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -140,6 +143,20 @@ public class GUI extends JLabel implements MouseListener, ActionListener {
 			}
 		});
 		frame.add(switchSound);
+
+		JButton restart = new JButton(replay);
+
+		restart.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (Integer.parseInt(seconds_string) >= 99 || board.won() || board.lost()) {
+					reset();
+					start();
+					board = new Board(gui);
+				}
+			}
+		});
+		frame.add(restart);
 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setTitle("Minesweeper");
@@ -228,7 +245,7 @@ public class GUI extends JLabel implements MouseListener, ActionListener {
 		seconds_string = String.format("%02d", seconds);
 		minutes_string = String.format("%02d", minutes);
 		hours_string = String.format("%02d", hours);
-		timeLabel.setText(hours_string+":"+minutes_string+":"+seconds_string);
+		timeLabel.setText(seconds_string);
 	}
 
 	public void paint(Graphics g) {
@@ -242,7 +259,7 @@ public class GUI extends JLabel implements MouseListener, ActionListener {
 			//bgm.restart();
 		}
 		//endgame
-		if (Integer.parseInt(seconds_string) >= 100 || board.won() || board.lost()) {
+		if (Integer.parseInt(seconds_string) >= 99 || board.won() || board.lost()) {
 			stop();
 		}
 	}
