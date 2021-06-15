@@ -1,4 +1,5 @@
 import java.io.File;
+import java.io.IOException;
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -15,6 +16,7 @@ public class Music implements Runnable {
 	private final String fn;
 	private boolean loops = false;
 	private BooleanControl muteControl;
+	private boolean isPlaying = true;
 	
 	/**
 	 * Create a music object from a given file name. 
@@ -47,12 +49,20 @@ public class Music implements Runnable {
 	public void stop() {
 		audioClip.stop();
 		audioClip.flush();
+		isPlaying = false;
 	}
 
-	public void mute() {
+	public void restart() {
+		audioClip.start();
+	}
+
+	public void mute() throws IOException {
 		muteControl.setValue(true);
-		audioClip.loop(0);
-		audioClip.flush();
+		audioStream.close();
+	}
+
+	public boolean isPlaying() {
+		return isPlaying;
 	}
 
 	/*
@@ -65,6 +75,7 @@ public class Music implements Runnable {
 		} else {
 			start3();
 		}
+		isPlaying = true;
 	}
 
 	int count = 0;

@@ -100,8 +100,11 @@ public class GUI extends JLabel implements MouseListener, ActionListener {
 			}
 		}
 
-		JLabel blank = new JLabel();
-		//frame.add(blank);
+		//centering bottom buttons
+		for (int i = 0; i < 5; i++) {
+			JLabel label = new JLabel();
+			frame.add(label);
+		}
 		frame.add(timeLabel);
 
 		//buttons for toggling mode and sound
@@ -129,12 +132,10 @@ public class GUI extends JLabel implements MouseListener, ActionListener {
 				sound = !sound;
 				if(sound) {
 					switchSound.setIcon(soundon);
-					//bgm = new Music("backgroundmusic.wav",true);
 					//bgm.play();
 				}
 				if(!sound) {
 					switchSound.setIcon(mute);
-					bgm.stop();
 				}
 			}
 		});
@@ -231,6 +232,19 @@ public class GUI extends JLabel implements MouseListener, ActionListener {
 	}
 
 	public void paint(Graphics g) {
+		if (!sound) {
+			try {
+				bgm.mute();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} else if (sound && !bgm.isPlaying()) {
+			//bgm.restart();
+		}
+		//endgame
+		if (Integer.parseInt(seconds_string) >= 100 || board.won() || board.lost()) {
+			stop();
+		}
 	}
 
 }
