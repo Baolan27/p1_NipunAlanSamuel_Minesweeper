@@ -65,7 +65,7 @@ public class GUI extends JLabel implements MouseListener, ActionListener {
 
 		//music
 		bgm = new Music("backgroundmusic.wav",true);
-		bgm.play();
+		//bgm.play();
 
 		//JFrame setup
 		frame = new JFrame("Minesweeper");
@@ -103,12 +103,14 @@ public class GUI extends JLabel implements MouseListener, ActionListener {
 		Icon soundon = new ImageIcon("src/Images/sound.png");
 		Icon mute = new ImageIcon("src/Images/mute.png");
 		Icon insaneon = new ImageIcon("src/Images/insane.png");
-		JButton switchInsane = new JButton(insaneon);
+		Icon insaneoff = new ImageIcon("src/Images/regmode.png");
+		JButton switchInsane = new JButton(insaneoff);
 		switchInsane.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
 				insane = !insane;
-				switchInsane.setIcon(insaneon);
+				if(!insane) {switchInsane.setIcon(insaneoff);}
+				if(insane) {switchInsane.setIcon(insaneon);}
 			}
 		});
 		frame.add(switchInsane);
